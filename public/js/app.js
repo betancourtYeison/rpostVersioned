@@ -16,7 +16,8 @@
     var me = this;
     me.appUrls = {
         login: '/signin',
-        root: '/'
+        root: '/',
+        users: '/users'
     };
 
     var sessionOnProgress = function($q, $rootScope, $location) {
@@ -54,6 +55,12 @@
             //********************** GENERAL ***********************************************//
             .when(me.appUrls.root, {
                 templateUrl: 'views/dashboard/dashboard.html',
+                resolve: {
+                    loginRequired: loginRequired
+                }
+            })
+            .when(me.appUrls.users, {
+                templateUrl: 'views/users/users.html',
                 resolve: {
                     loginRequired: loginRequired
                 }

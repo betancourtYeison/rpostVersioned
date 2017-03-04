@@ -11,5 +11,18 @@
                     password: password,
                 };
             };
+        })
+        .filter('stateParser', function() {
+            return function(arg) {
+                switch (arg) {
+                    case true:
+                        state = '<span class="label label-success">Activo</span>';
+                        break;
+                    default:
+                        state = '<span class="label label-danger">Inactivo</span>';
+                        break;
+                };
+                return state;
+            };
         });
 })();

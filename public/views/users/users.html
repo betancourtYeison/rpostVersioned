@@ -1,0 +1,98 @@
+<div class="dashboard-page" ng-controller="UsersController">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <custom-sidebar></custom-sidebar>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="col-sm-5 col-md-8">
+                    <h1>Usuarios</h1>
+                    <hr>
+                    <button ng-click="openModelCreateUser()" class="btn btn-success btn-sm btn-hide-filter">
+                        <i class="fa fa-plus-square"></i> Crear usuario
+                    </button>
+                    <div class="panel panel-success" style="margin-top: 15px">
+                        <div class="panel-heading">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control" placeholder="Buscar usuario" ng-model="search.username">
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <a href="" ng-click="orderBy()">
+                                                    Usuario
+                                                </a>
+                                                <span class="caret" style="cursor: pointer" ng-click="orderBy()"></span>
+                                            </th>
+                                            <th>Nombre</th>
+                                            <th>Apellidos</th>
+                                            <th>Correo electrónico</th>
+                                            <th>Crear Post</th>
+                                            <th>Fecha de creación</th>
+                                            <th>Administrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="user in users | orderBy:ordenSelected | filter:search" ng-click="showPostByUser(user.username)">
+                                            <td>{{user.username}}</td>
+                                            <td>{{user.first_name}}</td>
+                                            <td>{{user.last_name}}</td>
+                                            <td>{{user.email}}</td>
+                                            <td ng-bind-html="user.can_create_posts | stateParser"></td>
+                                            <td>{{user.date_joined | date:'medium'}}</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="...">
+                                                    <button style="margin: 1px 6px 0px 0px;" class="btn btn-primary btn-xs" id="updateUser{{user.username}}" ng-click="openModelUpdateUser(user)"><i class="fa fa-edit"></i> Ver / Editar</button>
+                                                    <button style="margin: 1px 6px 0px 0px;" class="btn btn-danger btn-xs" id="removeUser{{user.username}}" " ng-click="openModelDeleteUser(user) "><i class="fa fa-trash "></i> Eliminar</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 ">
+                    <h1>Posts</h1>
+                    <hr>
+                    <div class="alert alert-success " role="alert ">
+                        <table class="table " style="border: 1px solid #ddd; ">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <span>Título</span>
+                                    </td>
+                                    <td>
+                                        <span>Mensaje</span>
+                                    </td>
+                                    <td>
+                                        <span>Fecha de creación</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="post in postsByUser ">
+                                    <td>
+                                        <span>{{post.title}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{post.message}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{post.created_at | date:'medium'}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

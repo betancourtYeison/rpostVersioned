@@ -1,0 +1,66 @@
+<div class="modal-demo">
+    <form role="form" name="formUser">
+        <div class="modal-header">
+            <button type="button" ng-click="cancel()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+            <div ng-if="errors">
+                <div class="bs-callout bs-callout-info alert-danger">
+                    <p style="padding: 0px;margin: 4px 3px;"> <i class="fa fa-info-circle" style="font-size: 18px;vertical-align: middle;"></i> {{errors}}</p>
+                </div>
+            </div>
+            <div ng-if="response">
+                <div class="bs-callout bs-callout-info alert-success">
+                    <p style="padding: 0px;margin: 4px 3px;"> <i class="fa fa-info-circle" style="font-size: 18px;vertical-align: middle;"></i> {{response}}</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': formUser.username.$invalid, 'has-success': formUser.username.$valid}">
+                <label for="inputUsername">Usuario</label>
+                <input id="inputUsername" type="text" class="form-control" placeholder="Usuario" name="username" ng-model="user.username" ng-disabled="eventType === 'update'" required>
+                <div ng-show="formUser.username.$dirty && formUser.username.$invalid">
+                    <p class="help-block text-danger" ng-show="formUser.username.$error.required">Cambo obligatorio</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': formUser.password.$invalid, 'has-success': formUser.password.$valid}" ng-if="eventType === 'create'">
+                <label for="inputPassword">Contraseña</label>
+                <input id="inputPassword" type="password" class="form-control" placeholder="Contraseña" name="password" ng-model="user.password" required>
+                <div ng-show="formUser.password.$dirty && formUser.password.$invalid">
+                    <p class="help-block text-danger" ng-show="formUser.password.$error.required">Cambo obligatorio</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': formUser.first_name.$invalid, 'has-success': formUser.first_name.$valid}">
+                <label for="inputName">Nombre</label>
+                <input id="inputName" type="text" class="form-control" placeholder="Nombre" name="first_name" ng-model="user.first_name" required>
+                <div ng-show="formUser.first_name.$dirty && formUser.first_name.$invalid">
+                    <p class="help-block text-danger" ng-show="formUser.first_name.$error.required">Cambo obligatorio</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': formUser.last_name.$invalid, 'has-success': formUser.last_name.$valid}">
+                <label for="inputLastname">Apellidos</label>
+                <input id="inputLastname" type="text" class="form-control" placeholder="Apellidos" name="last_name" ng-model="user.last_name" required>
+                <div ng-show="formUser.last_name.$dirty && formUser.last_name.$invalid">
+                    <p class="help-block text-danger" ng-show="formUser.last_name.$error.required">Cambo obligatorio</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': formUser.email.$invalid, 'has-success': formUser.email.$valid}">
+                <label for="inputEmail">Correo electrónico</label>
+                <input id="inputEmai" type="email" class="form-control" placeholder="Correo electrónico" name="email" ng-model="user.email" required>
+                <div ng-show="formUser.email.$dirty && formUser.email.$invalid">
+                    <p class="help-block text-danger" ng-show="formUser.email.$error.required">Cambo obligatorio</p>
+                    <p class="help-block text-danger" ng-show="formUser.email.$error.email">Email invalido</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': formUser.can_create_posts.$invalid, 'has-success': formUser.can_create_posts.$valid}">
+                <label style="  font-style: italic;font-size: 11px;">Tipo: </label>
+                <div class="input-group" style="width:100%">
+                    <select class="form-control" ng-model="user.can_create_posts.selected" ng-options="o as o for o in user.can_create_posts.options" name="can_create_posts"></select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-click="saveUser()" ng-disabled="formUser.$invalid" class="btn btn-success">Guardar</button>
+            <button ng-click="cancel()" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+    </form>
+</div>
