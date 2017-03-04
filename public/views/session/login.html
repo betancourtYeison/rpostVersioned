@@ -1,3 +1,23 @@
-<div class="login-page">
-    login
+<div class="login-page" ng-controller="SessionController">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+            <img src="../../imgs/flat-avatar.png" class="user-avatar" />
+            <h1>R-<small>POSTS</small></h1>
+            <form name="loginForm" class="form-signin" ng-submit="loginForm.$valid && signIn()">
+                <div class="form-content">
+                    <div class="alert alert-info" role="alert" ng-show="errors">
+                        <span>{{errors}}</span>
+                    </div>
+                    <div class="form-group">
+                        <input ng-model="loginData.userCode" class="form-control input-underline input-lg" type="text" placeholder="Usuario" autocomplete="on" required>
+                    </div>
+                    <div class="form-group">
+                        <input ng-model="loginData.password" class="form-control input-underline input-lg" type="password" placeholder="Contraseña" autocomplete="on" required>
+                    </div>
+                </div>
+                <p ng-show="loginFailed">Login unsuccessful</p>
+                <button type="submit" class="btn btn-white btn-outline btn-lg btn-rounded">Iniciar sesión</button>
+            </form>
+        </div>
+    </div>
 </div>
