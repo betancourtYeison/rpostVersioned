@@ -1,0 +1,26 @@
+<div class="col-sm-3 col-md-2 sidebar" ng-controller="SidebarController">
+    <div class="text-center">
+        <h2 class="brand">R - <small>POSTS</small></h2>
+        <img src="../../imgs/flat-avatar.png" class="user-avatar" />
+        <br />
+        <h4>{{$root.currentUser.username}}</h4>
+        <a ui-sref="login" class="btn btn-white btn-outline btn-rounded btn-sm" ng-click='logout()'>Cerrar sesión</a>
+    </div>
+    <ul class="nav nav-sidebar">
+        <li id="{{isActive('root') ? 'activeModule' : ''}}" ng-class="{active: isActive('root')}" ng-click="openModule('root')">
+            <a scroll-top analytics-on="click" analytics-event="Abrir Inicio">
+                <i class="fa fa-dashboard"></i>
+                <span class="sidebarItem">Inicio</span>
+            </a>
+        </li>
+        <li id="{{isActive('users') ? 'activeModule' : ''}}" ng-class="{active: isActive('users')}" ng-click="openModule('users')">
+            <a scroll-top analytics-on="click" analytics-event="Abrir Inicio">
+                <i class="fa fa-users"></i>
+                <span class="sidebarItem">Usuarios</span>
+            </a>
+        </li>
+    </ul>
+    <div class="text-center">
+        <small>R -POSTS © 2017</small>
+    </div>
+</div>
