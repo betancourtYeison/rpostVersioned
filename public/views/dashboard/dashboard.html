@@ -1,10 +1,73 @@
-<div class="dashboard-page">
+<div class="dashboard-page" ng-controller="DashboardController">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <custom-sidebar></custom-sidebar>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="col-sm-8 col-md-7">
+                    <h1>Posts</h1>
+                    <hr>
+                    <div class="alert alert-success" role="alert">
+                        <table class="table" style="border: 1px solid #ddd;">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <span>Título</span>
+                                    </td>
+                                    <td>
+                                        <span>Mensaje</span>
+                                    </td>
+                                    <td>
+                                        <span>Fecha de creación</span>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="post in posts | orderBy:'-created_at'">
+                                    <td>
+                                        <span>{{post.title}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{post.message}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{post.created_at | date:'medium'}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-5">
+                    <form role="form" name="formPost">
+                        <div ng-if="errors">
+                            <div class="bs-callout bs-callout-info alert-danger">
+                                <p style="padding: 0px;margin: 4px 3px;"> <i class="fa fa-info-circle" style="font-size: 18px;vertical-align: middle;"></i> {{errors}}</p>
+                            </div>
+                        </div>
+                        <div ng-if="response">
+                            <div class="bs-callout bs-callout-info alert-success">
+                                <p style="padding: 0px;margin: 4px 3px;"> <i class="fa fa-info-circle" style="font-size: 18px;vertical-align: middle;"></i> {{response}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': formPost.title.$invalid, 'has-success': formPost.title.$valid}">
+                            <label for="inputTitle">Título:</label>
+                            <input id="inputTitle" type="text" class="form-control" placeholder="Título" name="title" ng-model="post.title" required>
+                            <div ng-show="formPost.title.$dirty && formPost.title.$invalid">
+                                <p class="help-block text-danger" ng-show="formPost.title.$error.required">Campo obligatorio</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': formPost.message.$invalid, 'has-success': formPost.message.$valid}">
+                            <label for="inputMessage">Mensaje:</label>
+                            <input id="inputMessage" type="text" class="form-control" placeholder="Mensaje" name="message" ng-model="post.message" required>
+                            <div ng-show="formPost.message.$dirty && formPost.message.$invalid">
+                                <p class="help-block text-danger" ng-show="formPost.message.$error.required">Cambo obligatorio</p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" ng-disabled="formPost.$invalid" ng-click="createPost(post)">Crear post</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
