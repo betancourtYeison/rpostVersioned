@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="form-group" ng-class="{'has-error': formUser.can_create_posts.$invalid, 'has-success': formUser.can_create_posts.$valid}">
-                <label style="  font-style: italic;font-size: 11px;">Tipo: </label>
+                <label for="inputEmail">Crear post</label>
                 <div class="input-group" style="width:100%">
                     <select class="form-control" ng-model="user.can_create_posts.selected" ng-options="o as o for o in user.can_create_posts.options" name="can_create_posts"></select>
                 </div>
