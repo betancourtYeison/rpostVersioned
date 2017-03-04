@@ -1,0 +1,16 @@
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+node_modules
+*.log
+
+# sass cache folder
+.sass-cache/*
+public/bower_components
+public/js/services/init.js
+dist/*
+.tmp
+
+Dockerfile
